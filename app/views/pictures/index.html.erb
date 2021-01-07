@@ -15,12 +15,12 @@
   <tbody>
     <% @pictures.each do |picture| %>
       <tr>
-        <td><%= picture.user.name %></td>
+        <td><%= link_to picture.user.name, user_path(picture.user.id)%></td>
         <td><%= image_tag picture.image.url %></td>
         <td><%= picture.content %></td>
-        <td><%= link_to 'Show', picture %></td>
-        <td><%= link_to 'Edit', edit_picture_path(picture) %></td>
-        <td><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', picture_path(picture.id) %></td>
+        <td><%= link_to 'Edit', edit_picture_path(picture.id) %></td>
+        <td><%= link_to 'Destroy', picture_path(picture.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

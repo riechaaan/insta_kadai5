@@ -1,0 +1,25 @@
+<%= form_with(model: @user, local: true, url:favorites_path)do |form| %>
+  <h1>お気に入り一覧</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>投稿者</th>
+          <th>Image</th>
+          <th>Content</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @favorites.each do |favorite| %>
+         <tr>
+          <td><%= favorite.user.name %></td>
+          <td><%= image_tag favorite.picture.image.url %></td>
+          <td><%= favorite.picture.content %></td>
+         </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <br>
+
+  <%= link_to '戻る', :back %>
+<% end %>
