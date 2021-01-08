@@ -31,6 +31,7 @@ class PicturesController < ApplicationController
     @picture.user_id = current_user.id
     respond_to do |format|
       if @picture.save
+        PictureMailer.picture_mail(@picture).deliver
         format.html { redirect_to @picture, notice: 'Picture was successfully created.' }
         format.json { render :show, status: :created, location: @picture }
       else
@@ -66,6 +67,6 @@ class PicturesController < ApplicationController
     end
 
     def picture_params
-      params.require(:picture).permit(:image, :image_cache, :content)
+      params.require(:picture).permit(:image, :image_cache, :content, :name, :email)
     end
 end
