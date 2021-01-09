@@ -1,4 +1,5 @@
 50.times do |n|
+  n = 0 if n > 9
   name = Faker::Games::Pokemon.name
   email = Faker::Internet.email
   password = "password"
@@ -7,7 +8,7 @@
     email: email,
     password: password,
     password_confirmation: password,
-    icon: open("./db/fixtures/icon#{n}.png")
+    # image: File.open(Rails.root + "db/fixtures/icon#{n}.png", "r")
+    image: open(Rails.root + "db/fixtures/icon#{n}.png")
     )
-  puts user.name
 end
