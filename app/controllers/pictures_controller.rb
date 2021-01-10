@@ -1,12 +1,19 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user, only: [:edit, :update, :destroy]
 
   def index
     @pictures = Picture.all
   end
 
   def show
+    if logged_in?
+      @favorite = current_user.favorites.find_by(id: @id)
+    else
+      redirect_to new_user_path, notice:"ログインが必要です"
+    end
     @favorite = current_user.favorites.find_by(picture_id: @picture.id)
+    @picture = Picture.includes(:user).find(params[:id])
   end
 
   def new
@@ -63,10 +70,12 @@ class PicturesController < ApplicationController
 
   private
   def set_picture
-  @picture = Picture.find(params[:id])
+    @picture = Picture.find(params[:id])
   end
 
   def picture_params
-  params.require(:picture).permit(:image, :image_cache, :content, :name, :email)
+    # params: { picture: { image: ... } }
+    # params.require(:picutre): { image: "", image_cache: ... }
+    params.require(:picture).permit(:image, :image_cache, :content, :name, :email) # .merge(user_id: current_user.id)
   end
 end
