@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     if logged_in?
       unless current_user == @user
-        flash[:notice] = "権限がありません。"
+        flash[:notice] = "アクセス権限がありません。"
         redirect_to pictures_path
       end
     else
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   def ensure_current_user
     if logged_in?
       unless current_user.id == params[:id].to_i
-        flash[:notice] = "権限がありません。"
+        flash[:notice] = "アクセス権限がありません。"
         redirect_to pictures_path
       end
     else
