@@ -1,5 +1,7 @@
 {
   "name": "insta_kadai5",
   "private": true,
-  "dependencies": {}
-}
+  "dependencies": {},
+  "engines": {
+    "node": "15.5.1"
+  }
