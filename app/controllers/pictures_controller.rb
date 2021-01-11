@@ -7,11 +7,11 @@ class PicturesController < ApplicationController
   end
 
   def show
-    if logged_in?
-      @favorite = current_user.favorites.find_by(id: @id)
-    else
-      redirect_to new_user_path, notice:"ログインが必要です"
-    end
+    # if logged_in?
+    #   @favorite = current_user.favorites.find_by(id: @id)
+    # else
+    #   redirect_to new_user_path, notice:"ログインが必要です"
+    # end
     @favorite = current_user.favorites.find_by(picture_id: @picture.id)
     @picture = Picture.includes(:user).find(params[:id])
   end
@@ -35,7 +35,7 @@ class PicturesController < ApplicationController
 
   def create
     @picture = Picture.new(picture_params)
-    @picture.user_id = current_user.id
+    @picture = current_user.pictures.build(picture_params)
     respond_to do |format|
       if @picture.save
         PictureMailer.picture_mail(@picture).deliver
@@ -69,6 +69,7 @@ class PicturesController < ApplicationController
   end
 
   private
+
   def set_picture
     @picture = Picture.find(params[:id])
   end

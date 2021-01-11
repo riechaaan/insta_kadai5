@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :favorite]
-  before_action :ensure_current_user,only:[:show, :edit, :update]
-
+  before_action :check_user, only: [:edit, :updare, :destroy]
   def new
     @user = User.new
   end

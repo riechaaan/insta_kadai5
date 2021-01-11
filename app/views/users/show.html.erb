@@ -2,7 +2,6 @@
 <p>プロフィール画像: <%= image_tag @user.image.url %></p>
 <h4>メールアドレス:<%= @user.email %></h4>
 <td><%= link_to 'お気に入り', favorite_user_path(@user.id) %></td>
-<% if current_user.id == @user.id %>
 <td><%= link_to '編集', edit_user_path(@user.id) %></td>
-<% end %>
 <td><%= link_to '投稿', new_picture_path %></td>
+<td><%= link_to '一覧', pictures_path %></td>

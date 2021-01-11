@@ -19,10 +19,10 @@
         <td><%= image_tag picture.image.url %></td>
         <td><%= picture.content %></td>
         <td><%= link_to 'Show', picture_path(picture.id) %></td>
-        <% if current_user.id == picture.id %>
-        <td><%= link_to 'Edit', edit_picture_path(picture.id) %></td>
+        <% if current_user.id == picture.user_id %>
+          <td><%= link_to 'Edit', edit_picture_path(picture.id) %></td>
+          <td><%= link_to 'Destroy', picture_path(picture.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
-        <td><%= link_to 'Destroy', picture_path(picture.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
